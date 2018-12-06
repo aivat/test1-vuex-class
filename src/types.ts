@@ -1,10 +1,11 @@
 // export interface IRootState {
 //     version: string
 //   }
-export interface State {
+export interface TodoState {
   todos: Todo[]
 }
 
 export interface Todo {
-  text: string
+  text: string,
+  checked: boolean
 }

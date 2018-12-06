@@ -1,12 +1,23 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex'
 
-import { todos } from './modules/todos';
+//import { state, getters, mutations } from './modules/todos';
 
+import { todos } from './modules/todos'
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store(todos)
+export const store = new Vuex.Store({
+    modules: {
+        todos
+    }
+})
+// export const store = new Vuex.Store({
+//     state,
+//     getters,
+//     mutations
+// })
+
 // export interface IRootState {
 //   hotels: IHotelsStateList;
 //   hotel: IHotelState;

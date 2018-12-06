@@ -1,5 +1,6 @@
 import { Module } from 'vuex'
-import { State } from '../../types'
+import { TodoState } from '../../types'
+import { GetterTree } from 'vuex'
 import { ActionTree } from 'vuex'
 import { MutationTree } from 'vuex'
 
@@ -8,13 +9,39 @@ import { MutationTree } from 'vuex'
 //     name: string;
 //   }
 
-const state: State = {
+export const state: TodoState = {
     todos: [
-        { text: 'Айват'}
+        { text: 'Айват', checked: false},
+        { text: 'Лена', checked: false},
+        { text: 'Татьяна', checked: true}
     ]
 }
+// export const todos = {
+//     state
+// }
+
+export const getters: GetterTree<TodoState, any> = {
+    todos: state => state.todos.filter(todo => !todo.checked),
+    dones: state => state.todos.filter(todo => todo.checked)
+}
+
+export const mutations: MutationTree<TodoState> = {
+    addTodo(state, newTodo) {
+        const todoCopy = Object.assign({}, newTodo)
+        state.todos.push(todoCopy)
+    },
+    toggleTodo(state, todo) {
+        todo.checked = !todo.checked
+    }
+}
+export const actions: ActionTree<TodoState, any> = {
+
+}
+
 export const todos = {
-    state
+    state,
+    getters,
+    mutations
 }
 // export const actions: ActionTree<ITodosState, IRootState> = {
 //     editName({commit}): any {
